@@ -1,0 +1,34 @@
+[W1]
+はじめに
+	install
+	oFのstructureについて
+	creating a Project
+
+基本:3D Graphicsを例に
+	ofBox, sphere
+	ofEasyCam
+	ofMesh
+	ofVbo
+
+よく使う関数紹介
+
+[W2]
+of上でのGUI
+
+[W3]
+particle system
+
+[W4/W5]
+四角とか丸とか描けるようになったけど、これをどうしたらいい感じになるのか？
+	ofSound
+	fft
+	プリミティブを使った表現例
+
+[W6/W7]
+shader
+
+[W8/W9]
+fft indicator紹介
+→	class化して各自creationできる所まで = Goal
+	作成したindicator classは、Proto#3 VJ systemに組み込み予定
+

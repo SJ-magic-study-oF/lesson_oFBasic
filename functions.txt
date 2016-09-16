@@ -1,0 +1,22 @@
+ofMap(v, v0, v1, out0, out1)
+
+ofClamp(v, v0, v1);
+
+float ofRandom(a, b)
+	a <= output < b
+
+ofNoise(x)
+
+ofToString(v);
+
+ofToInt(s);
+ofToFloat(s);
+
+ofGetWidth();
+ofGetHeight();
+
+ofGetElapsedTimef();
+
+ofShowCursor();
+ofHideCursor();
+
