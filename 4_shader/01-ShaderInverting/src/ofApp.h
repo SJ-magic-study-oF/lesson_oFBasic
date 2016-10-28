@@ -16,7 +16,6 @@ public:
 
 	ofShader shader;	//Shader
 	ofFbo fbo;			//Buffer for intermediate drawing
-	ofFbo fbo2;			//Second buffer for mask
 	ofImage image;		//Sunflower image
 
 	void keyPressed  (int key);

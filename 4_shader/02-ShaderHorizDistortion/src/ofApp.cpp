@@ -5,8 +5,6 @@ void ofApp::setup(){
 	shader.load( "shaderVert.c", "shaderFrag.c" );
 
 	fbo.allocate( ofGetWidth(), ofGetHeight() );
-	fbo2.allocate( ofGetWidth(), ofGetHeight() );
-	
 	image.loadImage( "sunflower.png" );	
 }
 
@@ -16,45 +14,27 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-	float time = ofGetElapsedTimef();
+	//1. Drawing into fbo buffer
+	fbo.begin();		//Start drawing into buffer
 
-	//1. Drawing input image (sunflower) into fbo buffer
-	fbo.begin();		
+	//Draw something here just like it is drawn on the screen
 	ofBackgroundGradient( ofColor( 255 ), ofColor( 128 ) );
 	ofSetColor( 255, 255, 255 );
 	image.draw( 351, 221 );
-	fbo.end();			
 
-	//2. Drawing mask (rotated triangle) into fbo2 buffer
-	fbo2.begin();	
-	ofBackground( 0, 0, 0 );
-	float ang = time * 30;
+	fbo.end();			//End drawing into buffer
 
-	ofPushMatrix();
-	ofTranslate( 512, 384 );
-	ofRotate( ang );
-	ofFill();
-	ofSetColor( 255, 255, 255 );
-	ofTriangle( -200, -114, 200, -114, 0, 230 );
-	ofPopMatrix();
-	fbo2.end();
+	//2. Drawing to screen through the shader
+	shader.begin();		//Enable the shader
 
-	//3. Drawing to screen through the shader
-	ofEnableAlphaBlending();		
-	//NOTE: It is important to enable alpha blending for correct shader's working,
-	//because shader performs masking by setting alpha-value of output color
-
-	shader.begin();
-	ofBackground( 0, 0, 0 );
-
-	shader.setUniform1f( "time", time );
-	shader.setUniformTexture( "texture1", fbo2.getTextureReference(), 1 ); 
+	float time = ofGetElapsedTimef();
+	shader.setUniform1f( "time", time );	//Pass float parameter "time" to shader
 
 	//Draw fbo image
 	ofSetColor( 255, 255, 255 );
 	fbo.draw( 0, 0 );
 
-	shader.end();		
+	shader.end();		//Disable the shader
 }
 
 //--------------------------------------------------------------
